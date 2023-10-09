@@ -1,6 +1,8 @@
 package aws
 
 import (
+	"strings"
+
 	"github.com/aws/aws-sdk-go-v2/config"
 	"gopkg.in/ini.v1"
 )
@@ -17,7 +19,16 @@ func GetProfiles() ([]string, error) {
 	var profiles []string
 	for _, section := range f.Sections() {
 		if len(section.Keys()) != 0 {
-			profiles = append(profiles, section.Name())
+			// profile section name is like "[profile test]"
+			// default profile section name is like "[default]"
+			profileWords := strings.Split(section.Name(), " ")
+
+			if len(profileWords) == 2 {
+				profiles = append(profiles, profileWords[1])
+				continue
+			} else if len(profileWords) == 1 && profileWords[0] == "default" {
+				profiles = append(profiles, profileWords[0])
+			}
 		}
 	}
 
