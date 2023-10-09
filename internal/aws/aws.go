@@ -18,7 +18,7 @@ func extractNameFromARNs(arns []string) ([]string, error) {
 }
 
 func extractNameFromARN(arn string) (string, error) {
-	arnPattern := `^arn:aws:[^:]+:[^:]+:[^:]+:[^/]+/([^/]+)(/.+)?$`
+	arnPattern := `^arn:aws:[^:]+:[^:]+:[^:]+:[^:]+/([^/]+)(?:/([^/]+))?`
 
 	re := regexp.MustCompile(arnPattern)
 	match := re.FindStringSubmatch(arn)

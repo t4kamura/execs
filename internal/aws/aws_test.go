@@ -4,17 +4,18 @@ import "testing"
 
 func TestExtractNameFromARN(t *testing.T) {
 	testCases := []struct {
+		testName      string
 		inputARN      string
 		expectedName  string
 		expectedError bool
 	}{
-		{"arn:aws:s3:::my-bucket", "my-bucket", false},
-		{"arn:aws:lambda:us-west-2:123456789:function/my-function", "my-function", false},
-		{"invalid-arn", "", true},
+		{"ECS Cluster ARN", "arn:aws:ecs:us-west-2:123456789:cluster/cluster-name", "cluster-name", false},
+		{"ECS Service ARN", "arn:aws:ecs:us-west-2:123456789:service/cluster-name/service-name", "service-name", false},
+		{"Blank", "invalid-arn", "", true},
 	}
 
 	for _, tc := range testCases {
-		t.Run(tc.inputARN, func(t *testing.T) {
+		t.Run(tc.testName, func(t *testing.T) {
 			resourceName, err := extractNameFromARN(tc.inputARN)
 
 			if tc.expectedError && err == nil {
