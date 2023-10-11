@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/t4kamura/execs/internal/aws"
@@ -12,7 +13,6 @@ import (
 
 const version = "0.0.0"
 
-// TODO: panic -> error
 func main() {
 	v := flag.Bool("v", false, "show version")
 	flag.Parse()
@@ -22,33 +22,34 @@ func main() {
 		os.Exit(0)
 	}
 
+	// profile selection
 	profiles, err := aws.GetProfiles()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	if len(profiles) == 0 {
-		panic("No profiles found")
+		log.Fatal("No profiles found")
 	}
 
 	profile, err := interactive.SelectItem("Select AWS profile", profiles)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	ctx := context.Background()
 	cfg, err := aws.LoadConfig(ctx, profile)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	clnt := aws.New(&cfg)
 
 	// cluster selection
 	clusters, err := clnt.ListClusterNames(ctx)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	if len(clusters) == 0 {
-		panic("No clusters found")
+		log.Fatal("No clusters found")
 	}
 
 	var selectedCluster string
@@ -57,17 +58,17 @@ func main() {
 	} else {
 		selectedCluster, err = interactive.SelectItem("Select cluster", clusters)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}
 
 	// service selection
 	services, err := clnt.ListServiceNames(ctx, selectedCluster)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	if len(services) == 0 {
-		panic("No services found")
+		log.Fatal("No services found")
 	}
 
 	var selectedService string
@@ -76,17 +77,17 @@ func main() {
 	} else {
 		selectedService, err = interactive.SelectItem("Select service", services)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}
 
 	// task selection
 	tasks, err := clnt.ListTaskNames(ctx, selectedCluster, selectedService)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	if len(tasks) == 0 {
-		panic("No services found")
+		log.Fatal("No services found")
 	}
 
 	var selectedTask string
@@ -95,17 +96,17 @@ func main() {
 	} else {
 		selectedTask, err = interactive.SelectItem("Select task", tasks)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}
 
 	// container seleection
 	containers, err := clnt.ListContainerNames(ctx, selectedCluster, selectedTask)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	if len(containers) == 0 {
-		panic("No containers found")
+		log.Fatal("No containers found")
 	}
 
 	var selectedContainer string
@@ -114,12 +115,12 @@ func main() {
 	} else {
 		selectedContainer, err = interactive.SelectItem("Select container", containers)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}
 
 	// start session
 	if err := clnt.StartSession(ctx, selectedCluster, selectedTask, selectedContainer); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
