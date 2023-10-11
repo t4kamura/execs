@@ -61,9 +61,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m model) View() string {
-	s := strings.Builder{}
-	s.WriteString(m.title + "\n\n")
+	if m.selected != "" {
+		return ""
+	}
 
+	s := strings.Builder{}
+	s.WriteString("\n" + m.title + "\n\n")
 	for i := 0; i < len(m.items); i++ {
 		if m.cursor == i {
 			s.WriteString("> ")
