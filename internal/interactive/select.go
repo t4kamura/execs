@@ -8,21 +8,19 @@ import (
 )
 
 type model struct {
-	choices     []string
-	questionMsg string
-	cursor      int
-	selected    string
+	items    []string
+	title    string
+	cursor   int
+	selected string
 }
 
-func AskChoices(questionMsg string, choices []string) (string, error) {
-	p := tea.NewProgram(model{choices: choices, questionMsg: questionMsg})
-	// Run returns the model as a tea.Model.
+func SelectItem(title string, items []string) (string, error) {
+	p := tea.NewProgram(model{items: items, title: title})
 	m, err := p.Run()
 	if err != nil {
 		return "", err
 	}
 
-	// Assert the final tea.Model to our local model and print the choice.
 	if m, ok := m.(model); ok && m.selected != "" {
 		return m.selected, nil
 	}
@@ -42,20 +40,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 
 		case "enter":
-			// Send the choice on the channel and exit.
-			m.selected = m.choices[m.cursor]
+			m.selected = m.items[m.cursor]
 			return m, tea.Quit
 
 		case "down", "j":
 			m.cursor++
-			if m.cursor >= len(m.choices) {
+			if m.cursor >= len(m.items) {
 				m.cursor = 0
 			}
 
 		case "up", "k":
 			m.cursor--
 			if m.cursor < 0 {
-				m.cursor = len(m.choices) - 1
+				m.cursor = len(m.items) - 1
 			}
 		}
 	}
@@ -65,18 +62,17 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (m model) View() string {
 	s := strings.Builder{}
-	s.WriteString(m.questionMsg + "\n\n")
+	s.WriteString(m.title + "\n\n")
 
-	for i := 0; i < len(m.choices); i++ {
+	for i := 0; i < len(m.items); i++ {
 		if m.cursor == i {
-			s.WriteString("(•) ")
+			s.WriteString("> ")
 		} else {
-			s.WriteString("( ) ")
+			s.WriteString("  ")
 		}
-		s.WriteString(m.choices[i])
+		s.WriteString(m.items[i])
 		s.WriteString("\n")
 	}
-	s.WriteString("\n(press q to quit)\n")
 
 	return s.String()
 }

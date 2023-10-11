@@ -30,7 +30,7 @@ func main() {
 		panic("No profiles found")
 	}
 
-	profile, err := interactive.AskChoices("Select AWS profile", profiles)
+	profile, err := interactive.SelectItem("Select AWS profile", profiles)
 	if err != nil {
 		panic(err)
 	}
@@ -55,7 +55,7 @@ func main() {
 	if len(clusters) == 1 {
 		selectedCluster = clusters[0]
 	} else {
-		selectedCluster, err = interactive.AskChoices("Select cluster", clusters)
+		selectedCluster, err = interactive.SelectItem("Select cluster", clusters)
 		if err != nil {
 			panic(err)
 		}
@@ -74,7 +74,7 @@ func main() {
 	if len(services) == 1 {
 		selectedService = services[0]
 	} else {
-		selectedService, err = interactive.AskChoices("Select service", services)
+		selectedService, err = interactive.SelectItem("Select service", services)
 		if err != nil {
 			panic(err)
 		}
@@ -93,7 +93,7 @@ func main() {
 	if len(tasks) == 1 {
 		selectedTask = tasks[0]
 	} else {
-		selectedTask, err = interactive.AskChoices("Select task", tasks)
+		selectedTask, err = interactive.SelectItem("Select task", tasks)
 		if err != nil {
 			panic(err)
 		}
@@ -112,7 +112,7 @@ func main() {
 	if len(containers) == 1 {
 		selectedContainer = containers[0]
 	} else {
-		selectedContainer, err = interactive.AskChoices("Select container", containers)
+		selectedContainer, err = interactive.SelectItem("Select container", containers)
 		if err != nil {
 			panic(err)
 		}
