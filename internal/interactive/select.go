@@ -25,7 +25,7 @@ func SelectItem(title string, items []string) (string, error) {
 		return m.selected, nil
 	}
 
-	return "", fmt.Errorf("invalid choice")
+	return "", fmt.Errorf("invalid select")
 }
 
 func (m model) Init() tea.Cmd {
