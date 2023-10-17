@@ -90,7 +90,7 @@ func (e *ECS) ListContainerNames(ctx context.Context, cluster string, task strin
 	return names, nil
 }
 
-func (e *ECS) StartSession(ctx context.Context, cluster string, task string, container string, shell string) error {
+func (e *ECS) StartSession(ctx context.Context, cluster string, task string, container string, shell string, region string) error {
 	resp, err := e.clnt.ExecuteCommand(ctx, &ecs.ExecuteCommandInput{
 		Command:     aws.String(shell),
 		Interactive: true,
@@ -102,8 +102,7 @@ func (e *ECS) StartSession(ctx context.Context, cluster string, task string, con
 		return err
 	}
 
-	// TODO: region
-	endpoint, err := ssm.NewDefaultEndpointResolver().ResolveEndpoint("ap-northeast-1", ssm.EndpointResolverOptions{})
+	endpoint, err := ssm.NewDefaultEndpointResolver().ResolveEndpoint(region, ssm.EndpointResolverOptions{})
 	if err != nil {
 		return err
 	}

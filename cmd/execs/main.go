@@ -135,7 +135,7 @@ func main() {
 	}
 
 	// start session
-	if err := clnt.StartSession(ctx, selectedCluster, selectedTask, selectedContainer, *s); err != nil {
+	if err := clnt.StartSession(ctx, selectedCluster, selectedTask, selectedContainer, *s, cfg.Region); err != nil {
 		log.Fatal(err)
 	}
 }
