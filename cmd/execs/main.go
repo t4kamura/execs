@@ -15,6 +15,7 @@ const version = "0.0.0"
 
 func main() {
 	v := flag.Bool("v", false, "show version")
+	s := flag.String("s", "/bin/bash", "shell used within ECS container")
 	flag.Parse()
 
 	if *v {
@@ -129,7 +130,7 @@ func main() {
 	}
 
 	// start session
-	if err := clnt.StartSession(ctx, selectedCluster, selectedTask, selectedContainer); err != nil {
+	if err := clnt.StartSession(ctx, selectedCluster, selectedTask, selectedContainer, *s); err != nil {
 		log.Fatal(err)
 	}
 }

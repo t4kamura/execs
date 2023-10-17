@@ -90,10 +90,9 @@ func (e *ECS) ListContainerNames(ctx context.Context, cluster string, task strin
 	return names, nil
 }
 
-func (e *ECS) StartSession(ctx context.Context, cluster string, task string, container string) error {
+func (e *ECS) StartSession(ctx context.Context, cluster string, task string, container string, shell string) error {
 	resp, err := e.clnt.ExecuteCommand(ctx, &ecs.ExecuteCommandInput{
-		// TODO: shell
-		Command:     aws.String("/bin/bash"),
+		Command:     aws.String(shell),
 		Interactive: true,
 		Task:        aws.String(task),
 		Cluster:     aws.String(cluster),
