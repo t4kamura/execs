@@ -2,7 +2,6 @@ package aws
 
 import (
 	"context"
-	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
@@ -116,7 +115,6 @@ func (e *ECS) StartSession(ctx context.Context, cluster string, task string, con
 		TokenValue:  aws.ToString(resp.Session.TokenValue),
 		Endpoint:    endpoint.URL,
 		ClientId:    uuid.NewString(),
-		TargetId:    "ecs:" + strings.Join([]string{cluster, task, container}, "_"),
 		DataChannel: &datachannel.DataChannel{},
 	}
 
