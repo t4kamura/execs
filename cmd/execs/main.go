@@ -11,7 +11,7 @@ import (
 	"github.com/t4kamura/execs/internal/interactive"
 )
 
-const version = "0.0.0"
+const version = "0.0.1"
 
 func main() {
 	v := flag.Bool("v", false, "show version")
