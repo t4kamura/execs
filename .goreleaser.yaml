@@ -25,3 +25,9 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+brews:
+  - repository:
+      owner: t4kamura
+      name: homebrew-tap
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+    homepage: https://github.com/t4kamura/execs
