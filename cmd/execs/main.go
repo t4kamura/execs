@@ -28,13 +28,14 @@ func main() {
 		log.Fatal(err)
 	}
 	if len(profiles) == 0 {
-		log.Fatal("No profiles found")
+		log.Fatal("No AWS profiles found")
 	}
 
 	profile, err := interactive.SelectItem("Select AWS profile", profiles)
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Printf("AWS profile: %s\n", profile)
 
 	ctx := context.Background()
 	cfg, err := aws.LoadConfig(ctx, profile)
@@ -55,11 +56,13 @@ func main() {
 	var selectedCluster string
 	if len(clusters) == 1 {
 		selectedCluster = clusters[0]
+		fmt.Printf("Cluster: %s (auto selected)\n", selectedCluster)
 	} else {
 		selectedCluster, err = interactive.SelectItem("Select cluster", clusters)
 		if err != nil {
 			log.Fatal(err)
 		}
+		fmt.Printf("Cluster: %s\n", selectedCluster)
 	}
 
 	// service selection
@@ -74,11 +77,13 @@ func main() {
 	var selectedService string
 	if len(services) == 1 {
 		selectedService = services[0]
+		fmt.Printf("Service: %s (auto selected)\n", selectedService)
 	} else {
 		selectedService, err = interactive.SelectItem("Select service", services)
 		if err != nil {
 			log.Fatal(err)
 		}
+		fmt.Printf("Service: %s\n", selectedService)
 	}
 
 	// task selection
@@ -93,11 +98,13 @@ func main() {
 	var selectedTask string
 	if len(tasks) == 1 {
 		selectedTask = tasks[0]
+		fmt.Printf("Task: %s (auto selected)\n", selectedTask)
 	} else {
 		selectedTask, err = interactive.SelectItem("Select task", tasks)
 		if err != nil {
 			log.Fatal(err)
 		}
+		fmt.Printf("Task: %s\n", selectedTask)
 	}
 
 	// container seleection
@@ -112,11 +119,13 @@ func main() {
 	var selectedContainer string
 	if len(containers) == 1 {
 		selectedContainer = containers[0]
+		fmt.Printf("Container: %s (auto selected)\n", selectedContainer)
 	} else {
 		selectedContainer, err = interactive.SelectItem("Select container", containers)
 		if err != nil {
 			log.Fatal(err)
 		}
+		fmt.Printf("Container: %s\n", selectedContainer)
 	}
 
 	// start session
