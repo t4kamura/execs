@@ -23,6 +23,11 @@ func main() {
 		os.Exit(0)
 	}
 
+	if len(flag.Args()) != 0 {
+		flag.Usage()
+		os.Exit(1)
+	}
+
 	// profile selection
 	profiles, err := aws.GetProfiles()
 	if err != nil {
