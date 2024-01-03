@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.38.1
 	github.com/aws/session-manager-plugin v0.0.0-20230808183647-dbfa0bfdb04b
-	github.com/charmbracelet/bubbletea v0.24.2
+	github.com/charmbracelet/bubbletea v0.25.0
 	github.com/google/uuid v1.3.1
 	gopkg.in/ini.v1 v1.67.0
 )
@@ -40,7 +40,7 @@ require (
 	github.com/muesli/ansi v0.0.0-20211018074035-2e021307bc4b // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
-	github.com/muesli/termenv v0.15.1 // indirect
+	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/stretchr/objx v0.5.1 // indirect
