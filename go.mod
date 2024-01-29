@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.44.6
 	github.com/aws/session-manager-plugin v0.0.0-20230808183647-dbfa0bfdb04b
 	github.com/charmbracelet/bubbletea v0.25.0
-	github.com/google/uuid v1.3.1
+	github.com/google/uuid v1.6.0
 	gopkg.in/ini.v1 v1.67.0
 )
 
