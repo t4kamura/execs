@@ -5,7 +5,7 @@ go 1.21.1
 require (
 	github.com/aws/aws-sdk-go-v2 v1.24.1
 	github.com/aws/aws-sdk-go-v2/config v1.26.3
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.30.2
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.38.1
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.44.6
 	github.com/aws/session-manager-plugin v0.0.0-20230808183647-dbfa0bfdb04b
 	github.com/charmbracelet/bubbletea v0.25.0
