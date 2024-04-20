@@ -3,4 +3,22 @@ updates:
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
+      timezone: "Asia/Tokyo"
+      interval: "weekly"
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      major:
+        patterns:
+          - "*"
+        update-types:
+          - major
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      timezone: "Asia/Tokyo"
       interval: "weekly"
