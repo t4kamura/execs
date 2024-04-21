@@ -1,0 +1,12 @@
+pre-commit:
+  parallel: true
+  commands:
+    gobuild:
+      glob: "*.go"
+      run: go build -v ./...
+    gotest:
+      glob: "*.go"
+      run: go test ./...
+    govet:
+      glob: "*.go"
+      run: go vet ./...
