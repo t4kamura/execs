@@ -23,6 +23,12 @@ go install github.com/t4kamura/execs
 To get started
 
 ```sh
+execs -p <AWS Profile>
+```
+
+or first select an interactive AWS profile.
+
+```sh
 execs
 ```
 
