@@ -16,6 +16,7 @@ const version = "0.0.1"
 func main() {
 	v := flag.Bool("v", false, "show version")
 	s := flag.String("s", "/bin/bash", "shell used within ECS container")
+	p := flag.String("p", "", "AWS profile")
 	flag.Parse()
 
 	if *v {
@@ -28,20 +29,25 @@ func main() {
 		os.Exit(1)
 	}
 
-	// profile selection
-	profiles, err := aws.GetProfiles()
-	if err != nil {
-		log.Fatal(err)
-	}
-	if len(profiles) == 0 {
-		log.Fatal("No AWS profiles found")
-	}
+	var profile string
+	if *p != "" {
+		profile = *p
+		fmt.Printf("Runs with AWS profile: %s\n", profile)
+	} else {
+		profiles, err := aws.GetProfiles()
+		if err != nil {
+			log.Fatal(err)
+		}
+		if len(profiles) == 0 {
+			log.Fatal("No AWS profiles found")
+		}
 
-	profile, err := interactive.SelectItem("Select AWS profile", profiles)
-	if err != nil {
-		log.Fatal(err)
+		profile, err = interactive.SelectItem("Select AWS profile", profiles)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("AWS profile: %s\n", profile)
 	}
-	fmt.Printf("AWS profile: %s\n", profile)
 
 	ctx := context.Background()
 	cfg, err := aws.LoadConfig(ctx, profile)
