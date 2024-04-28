@@ -6,10 +6,10 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.26.1
 	github.com/aws/aws-sdk-go-v2/config v1.27.11
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.41.7
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.49.5
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.50.0
 	github.com/aws/session-manager-plugin v0.0.0-20230808183647-dbfa0bfdb04b
 	github.com/charmbracelet/bubbletea v0.25.0
-	github.com/google/uuid v1.3.1
+	github.com/google/uuid v1.6.0
 	gopkg.in/ini.v1 v1.67.0
 )
 
