@@ -37,6 +37,9 @@ func (e *ECS) ListClusterNames(ctx context.Context) ([]string, error) {
 		return nil, err
 	}
 	names, err := extractNameFromARNs(resp.ClusterArns)
+	if err != nil {
+		return nil, err
+	}
 
 	return names, nil
 }
@@ -50,6 +53,9 @@ func (e *ECS) ListServiceNames(ctx context.Context, cluster string) ([]string, e
 		return nil, err
 	}
 	names, err := extractNameFromARNs(resp.ServiceArns)
+	if err != nil {
+		return nil, err
+	}
 
 	return names, nil
 }
@@ -65,6 +71,9 @@ func (e *ECS) ListTaskNames(ctx context.Context, cluster string, service string)
 		return nil, err
 	}
 	names, err := extractNameFromARNs(resp.TaskArns)
+	if err != nil {
+		return nil, err
+	}
 
 	return names, nil
 }
